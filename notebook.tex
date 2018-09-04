@@ -1,0 +1,1057 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Untitled}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{unit-1-capstone-national-outbreak-reporting-system}{%
+\section{Unit 1 capstone: National Outbreak Reporting
+System}\label{unit-1-capstone-national-outbreak-reporting-system}}
+
+Centers for Disease Control and Prevention\\
+https://wwwn.cdc.gov/norsdashboard/
+
+    \hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+The National Outbreak Reporting System is a database of enteric disease
+outbreaks from 1998 through 2016. With each outbreak information is
+included on time (year and month), location (state), primary mode
+(vector), etiology (pathogenic cause), setting (location, such as
+restaurant, hotel, etc.), severity (illness, hospitalization, death),
+information on food types, water type and animal type for primary
+mode.\\
+For this analysis, severity is analysed with primary mode to determined
+which mode contributes to the most outbreaks. Strategies to reduce the
+number of outbreaks are developed and experiments designed to determine
+the effectiveness of strategies.
+
+    \hypertarget{protocol}{%
+\subsection{Protocol}\label{protocol}}
+
+Since germ theory was realized, reducing the incidence of communicable
+diseases involves changing processes and practices that allow the spread
+of pathogens. In this proposal engineering and process changes are
+proposed that reduce specific contact modes. Then implementation methods
+are tested, to determine the most efficacious means to implement changes
+by way of reducing the incidence of outbreaks.
+
+    \hypertarget{scope}{%
+\subsubsection{Scope}\label{scope}}
+
+These studies will evaluate the effectiveness of information transfer
+from public health and disease control authorities to the actors and
+locations where disease outbreaks occur. This plan will first tackle the
+most common mode of disease outbreak. Then, if the methods were found
+effective, apply those methods to the next most common mode of disease
+outbreaks (again, conducting experiments to demonstrate effectiveness).
+Current communication and education methods will be used as controls.
+
+    \hypertarget{methods}{%
+\subsubsection{Methods}\label{methods}}
+
+The study is designed with test conditions in an orthogonal array, so
+that analysis of variance can be used to analyze the test result so that
+the most effective solution can be determine and the gross effect.
+
+    \hypertarget{test-samples-treatments}{%
+\subsubsection{Test samples /
+treatments}\label{test-samples-treatments}}
+
+\hypertarget{dependent-variable}{%
+\paragraph{Dependent variable:}\label{dependent-variable}}
+
+Illness caused by person to person contact. \#\#\#\# Independent
+variables: Communication methods for implementation of process and
+engineering controls.\\
+\#\#\#\# Treatments:\\
+Control: Currently, disease control and prevention information is
+passive, that is, the information can be sought after and found in
+various public health service's websites.\\
+Test treatment 1: Direct emails to identified potential outbreak
+locations.\\
+Test treatment 2: Direct in facility education to potential outbreak
+locations.\\
+Test treatment 2: Add specific process and engineering control mandates
+to licensure criteria.
+
+    \hypertarget{study-design}{%
+\subsubsection{Study design}\label{study-design}}
+
+\hypertarget{study-blocks}{%
+\paragraph{Study blocks:}\label{study-blocks}}
+
+The study will be designed as a full factorial with three factors
+(treatments). The outcome measure will be difference from the control.
+The treatment will either be active (1) or inactive (-1), for a total of
+eight combinations per study block, where the first run is the control
+condition.
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Run & Direct Mail & Direct Ed & Licensure\tabularnewline
+\midrule
+\endhead
+1 & -1 & -1 & -1\tabularnewline
+2 & -1 & -1 & 1\tabularnewline
+3 & -1 & 1 & -1\tabularnewline
+4 & -1 & 1 & 1\tabularnewline
+5 & 1 & -1 & -1\tabularnewline
+6 & 1 & -1 & 1\tabularnewline
+7 & 1 & 1 & -1\tabularnewline
+8 & 1 & 1 & 1\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{block-distribution}{%
+\paragraph{Block distribution:}\label{block-distribution}}
+
+Each of the ten NIH administration districts will randomly assign one of
+the eight test runs to facilities in the district. Care will be taken to
+adjust the proportion of types of sites so that they reflect the
+population in the district and the contribution to outbreaks (as
+determined from the data analysis below).
+
+    \hypertarget{communication-timing}{%
+\paragraph{Communication timing}\label{communication-timing}}
+
+Since the incidence of outbreaks is found to peak mid-winter, the study
+should begin by the month of March.
+
+    \hypertarget{data-collection}{%
+\subsubsection{Data collection}\label{data-collection}}
+
+Along with outbreak data, each incident should record the treatment
+condition.
+
+    \hypertarget{data-analysis}{%
+\subsubsection{Data Analysis}\label{data-analysis}}
+
+Each test condition will be analyzed using analysis of variance where
+t-critical at \(\alpha\)=0.05 is a significant effect. Two-way and
+three-way interactions will also be analyzed.
+
+    \hypertarget{test-results}{%
+\paragraph{Test results}\label{test-results}}
+
+Where a test condition or combination of conditions is found efficacious
+in reducing outbreaks. That combination will be implement. The
+effectiveness of the implementation will be monitored.
+
+    \hypertarget{cost-benefit}{%
+\paragraph{Cost / Benefit}\label{cost-benefit}}
+
+A cost benefit analysis should be incorporated in the final report.
+
+    \hypertarget{analysis-of-current-data}{%
+\subsection{Analysis of current data}\label{analysis-of-current-data}}
+
+The initial database is loaded, then grouped by primary mode and year to
+return illnesses, hospitalizations, and deaths by year.
+
+Hospitalizations and deaths are not likely independent from illnesses.
+There may be slightly different etiologies that result in
+hospitalizations and deaths apart from illnesses. But the most likely
+reasons for hospitalizations and deaths are the health and strength of
+the patient. So if illnesses are reduced hospitalizations and deaths
+should follow.
+
+The purpose of this analysis is to determine any difference is contact
+mode for illnesses, then develop strategies to reduce occurrence and the
+experimental plans to demonstrate effectiveness (or lack of
+effectiveness). Individual contact modes of the illnesses dataset are
+compared over time (line charts) and in aggregate (box plots). To
+determine if any contact mode has a statistical greater effect on a
+severity category, the Kruskal--Wallis one-way analysis of variance test
+was used, where the null hypothesis is that the contact modes arise from
+the same distribution. The Kruskal-Wallis test is analogous to a one-way
+ANOVA, though non-parametric. Analysis of the contact modes showed that
+the data was not normally distributed, nor are the variances equal,
+general ANOVA is not applicable. This is not unexpected as contact mode
+is count data.
+
+    \hypertarget{python-environment}{%
+\subsubsection{Python Environment}\label{python-environment}}
+
+Python Pandas is used to manage the data. https://pandas.pydata.org/.\\
+Numpy and Scipy.stats are used for computations http://www.numpy.org/
+and https://www.scipy.org/.\\
+Matplotlib.pyplot and Seaborn are used for charting
+https://matplotlib.org/ and https://seaborn.pydata.org/.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{stats}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{lognorm}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{probplot}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{t}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{norm}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats}\PY{n+nn}{.}\PY{n+nn}{morestats} \PY{k}{import} \PY{n}{bartlett}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats}\PY{n+nn}{.}\PY{n+nn}{morestats} \PY{k}{import} \PY{n}{levene}
+         \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{diagnostic}
+         \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{graphics} \PY{k}{import} \PY{n}{gofplots}
+         \PY{k+kn}{from} \PY{n+nn}{pyDOE} \PY{k}{import} \PY{o}{*}
+         
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{outbreaks} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/outbreaks.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Primary Mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{outbreaks} \PY{o}{=} \PY{n}{outbreaks}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Primary Mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{categories} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Animal Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Animal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Environmental contamination other than food/water}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Environ.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Food}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Food}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Indeterminate/Other/Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Person\PYZhy{}to\PYZhy{}person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Water}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Water}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        \PY{n}{outbreaks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{categories}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{aggregated\PYZus{}outbreaks} \PY{o}{=} \PY{n}{outbreaks}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+        \PY{n}{aggregated\PYZus{}outbreaks}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{aggregated\PYZus{}outbreaks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year\PYZus{}month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{aggregated\PYZus{}outbreaks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}\PY{n}{aggregated\PYZus{}outbreaks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+        
+        \PY{n}{aggregated\PYZus{}outbreaks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year\PYZus{}month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{aggregated\PYZus{}outbreaks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year\PYZus{}month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PYZbs{}
+                                          \PY{n+nb}{format}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y/}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{aggregated\PYZus{}outbreaks}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year\PYZus{}month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{contact-mode-by-time}{%
+\subsubsection{Contact mode by time}\label{contact-mode-by-time}}
+
+The number of illnesses caused by outbreaks is analyzed first. The chart
+below shows the number of illnesses and the mode assigned by year. Only
+food ingestion was assigned as a mode from 1998 to 2008. Since the
+analysis is intended to compare the modes, the data before 2009 will be
+removed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{catplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{aggregated\PYZus{}outbreaks}\PY{p}{,} \PYZbs{}
+                   \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{point}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend\PYZus{}out}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{ci}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{height}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,} \PY{n}{aspect}\PY{o}{=}\PY{l+m+mi}{11}\PY{o}{/}\PY{l+m+mi}{6}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Illnesses by Contact Mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year of Outbreak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{leg} \PY{o}{=} \PY{n}{g}\PY{o}{.}\PY{n}{axes}\PY{o}{.}\PY{n}{flat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{get\PYZus{}legend}\PY{p}{(}\PY{p}{)}
+        \PY{n}{new\PYZus{}title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Contact Mode}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{leg}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{new\PYZus{}title}\PY{p}{)}
+        \PY{n}{new\PYZus{}labels} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Animal Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Environmental Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Food Ingestion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Person to Person Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Water Ingestion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{leg}\PY{o}{.}\PY{n}{texts}\PY{p}{,} \PY{n}{new\PYZus{}labels}\PY{p}{)}\PY{p}{:} \PY{n}{t}\PY{o}{.}\PY{n}{set\PYZus{}text}\PY{p}{(}\PY{n}{l}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{aggregated\PYZus{}outbreaks\PYZus{}2009\PYZus{}greater} \PY{o}{=} \PYZbs{}
+            \PY{n}{aggregated\PYZus{}outbreaks}\PY{p}{[}\PY{n}{aggregated\PYZus{}outbreaks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{2009}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{contact-mode-by-time-since-2009}{%
+\subsubsection{Contact mode by time (since
+2009)}\label{contact-mode-by-time-since-2009}}
+
+The chart below shows the illnesses by mode from 2009 to 2016. Person to
+person contact seems to be the largest contributer to illnesses. Note
+the cyclic pattern, it will be important to the experimental strategy.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{catplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year\PYZus{}month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                        \PY{n}{data}\PY{o}{=}\PY{n}{aggregated\PYZus{}outbreaks\PYZus{}2009\PYZus{}greater}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{point}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                        \PY{n}{legend\PYZus{}out}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{ci}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{height}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,} \PY{n}{aspect}\PY{o}{=}\PY{l+m+mi}{11}\PY{o}{/}\PY{l+m+mi}{6}\PY{p}{)}\PYZbs{}
+            \PY{c+c1}{\PYZsh{}.set\PYZus{}xticklabels(aggregated\PYZus{}outbreaks\PYZus{}2009\PYZus{}greater[\PYZsq{}Year\PYZsq{}])\PYZbs{}}
+            \PY{c+c1}{\PYZsh{}.ticker.MultipleLocator(base=12)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Illnesses by Contact Mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year of Outbreak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{leg} \PY{o}{=} \PY{n}{g}\PY{o}{.}\PY{n}{axes}\PY{o}{.}\PY{n}{flat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{get\PYZus{}legend}\PY{p}{(}\PY{p}{)}
+        \PY{n}{new\PYZus{}title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Contact Mode}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{leg}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{new\PYZus{}title}\PY{p}{)}
+        \PY{n}{new\PYZus{}labels} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Animal Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Environmental Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Food Ingestion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Person to Person Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Water Ingestion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{leg}\PY{o}{.}\PY{n}{texts}\PY{p}{,} \PY{n}{new\PYZus{}labels}\PY{p}{)}\PY{p}{:} \PY{n}{t}\PY{o}{.}\PY{n}{set\PYZus{}text}\PY{p}{(}\PY{n}{l}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{ax} \PY{o+ow}{in} \PY{n}{g}\PY{o}{.}\PY{n}{axes}\PY{o}{.}\PY{n}{flat}\PY{p}{:}
+            \PY{n}{labels} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}xticklabels}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{l} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{12}!=0): labels[i] = \PYZsq{}\PYZsq{}
+                \PY{k}{if}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{12}==0): str(labels[i])[0:3]
+            \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+            
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{box-plot-of-illnesses-by-contact-mode}{%
+\subsubsection{Box plot of illnesses by contact
+mode}\label{box-plot-of-illnesses-by-contact-mode}}
+
+The box plot below shows the number of illnesses assigned during the
+years 2009 to 2016 by contact mode. Person to person contact seems to
+have a greater number of illnesses and larger variation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{illnesses} \PY{o}{=} \PY{n}{aggregated\PYZus{}outbreaks\PYZus{}2009\PYZus{}greater}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{illnesses}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{illnesses}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PYZbs{}
+                    \PY{n}{data}\PY{o}{=}\PY{n}{illnesses}\PY{p}{,} \PY{n}{saturation}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{dodge}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PYZbs{}
+                    \PY{n}{fliersize}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{whis}\PY{o}{=}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{n}{notch}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Box plot of Illnesses by Contact Mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Contact Mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{data-description}{%
+\subsubsection{Data description}\label{data-description}}
+
+Person to person contact has the largest mean and median, followed by
+food ingestion. At first glance, the data seems to be distributed with a
+long right tail, the medians are consistently less than the means and
+the medians tend to be closer to the first quartile cut. The food
+ingestion mode exhibits the most clues that it may tend towards a normal
+distribution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{illnesses}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}              Illnesses                                                    \textbackslash{}
+                         count         mean          std    min      25\%     50\%   
+        primary\_mode                                                               
+        Animal            87.0    74.804598   112.479956    2.0     8.00    27.0   
+        Environ.          51.0    56.627451    94.793662    2.0     7.50    24.0   
+        Food              96.0  1202.041667   450.051223  457.0   914.25  1102.0   
+        Person            96.0  6186.791667  6095.823369  386.0  1173.50  3293.0   
+        Unknown           96.0   546.750000   340.011826   44.0   307.50   454.0   
+        Water             68.0   148.485294   251.451458    2.0    20.00    45.0   
+        
+                                         
+                           75\%      max  
+        primary\_mode                     
+        Animal           78.00    641.0  
+        Environ.         56.50    565.0  
+        Food           1415.50   3654.0  
+        Person        10278.25  23520.0  
+        Unknown         763.50   1575.0  
+        Water           177.50   1587.0  
+\end{Verbatim}
+            
+    \hypertarget{histograms-of-illnesses-by-contact-mode}{%
+\subsubsection{Histograms of illnesses by contact
+mode}\label{histograms-of-illnesses-by-contact-mode}}
+
+The histograms below show that the data does not closely follow a normal
+distribution (red dotted line). Note the right tail.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{x1} \PY{o}{=} \PY{n}{illnesses}\PY{p}{[}\PY{n}{illnesses}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{Illnesses}
+        \PY{n}{x2} \PY{o}{=} \PY{n}{illnesses}\PY{p}{[}\PY{n}{illnesses}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Food}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{Illnesses}
+        \PY{n}{x3} \PY{o}{=} \PY{n}{illnesses}\PY{p}{[}\PY{n}{illnesses}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{Illnesses}
+        \PY{n}{x4} \PY{o}{=} \PY{n}{illnesses}\PY{p}{[}\PY{n}{illnesses}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Animal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{Illnesses}
+        \PY{n}{x5} \PY{o}{=} \PY{n}{illnesses}\PY{p}{[}\PY{n}{illnesses}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Water}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{Illnesses}
+        \PY{n}{x6} \PY{o}{=} \PY{n}{illnesses}\PY{p}{[}\PY{n}{illnesses}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Environ.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{Illnesses}
+        
+        \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{x3}\PY{p}{,} \PY{n}{x4}\PY{p}{,} \PY{n}{x5}\PY{p}{,} \PY{n}{x6}\PY{p}{]}
+        \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{title} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Person to Person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Food Ingestion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Animal Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Water Ingestion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Environmental Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{n}{label} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ by Contact Mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{element} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{density}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+            \PY{n}{x\PYZus{}axis} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}axis}\PY{p}{,} \PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x\PYZus{}axis}\PY{p}{,} \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{label}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+                
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{anderson-darling-and-kolmogorov-smirnov-tests-for-normal-distributions}{%
+\subsubsection{Anderson-Darling and Kolmogorov-Smirnov tests for normal
+distributions}\label{anderson-darling-and-kolmogorov-smirnov-tests-for-normal-distributions}}
+
+The Anderson-Darling and Kolmogorov-Smirnov are two test that assess
+goodness of fit to a distribution. Where the null hypothesis is that the
+data fits a distribution (normal in this case). In all cases both test
+gave evidence enough to reject the null hypothesis and conclude that the
+data are not a normal distribution (at \(\alpha\) = 0.05).
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Mode & p value AD & p value KS\tabularnewline
+\midrule
+\endhead
+Person to person & \textless{}0.001 & \textless{}0.001\tabularnewline
+Food ingestion & 0.001 & 0.001\tabularnewline
+Unknown & \textless{}0.001 & \textless{}0.001\tabularnewline
+Animal & \textless{}0.001 & \textless{}0.001\tabularnewline
+Water & \textless{}0.001 & \textless{}0.001\tabularnewline
+Environmental & \textless{}0.001 & \textless{}0.001\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{diagnostic}\PY{o}{.}\PY{n}{normal\PYZus{}ad}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{x1}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x1}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mf}{0.001}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+c:\textbackslash{}users\textbackslash{}rgorh\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python37\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}statsmodels\textbackslash{}stats\textbackslash{}\_adnorm.py:66: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  S = np.sum((2*i[sl1]-1.0)/N*(np.log(z)+np.log(1-z[sl2])), axis=axis)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} (1.9653571234283618, 4.801899405101693e-05)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{diagnostic}\PY{o}{.}\PY{n}{kstest\PYZus{}normal}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{x4}\PY{p}{)}\PY{p}{,} \PY{n}{dist}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pvalmethod}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{approx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} (0.059895747151880285, 0.2)
+\end{Verbatim}
+            
+    \hypertarget{bartletts-and-levenes-tests-for-equal-variance}{%
+\subsubsection{Bartlett's and Levene's tests for equal
+variance}\label{bartletts-and-levenes-tests-for-equal-variance}}
+
+Bartlett's and Levene's equal variance tests assess the variance between
+possible test groups. The null hypothesis is that variance is equal
+between groups. Both tests gave evidence that the variance is not equal
+between groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{bartlett}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{x3}\PY{p}{,} \PY{n}{x4}\PY{p}{,} \PY{n}{x5}\PY{p}{,} \PY{n}{x6}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} BartlettResult(statistic=1771.233390379467, pvalue=0.0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{levene}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{x3}\PY{p}{,} \PY{n}{x4}\PY{p}{,} \PY{n}{x5}\PY{p}{,} \PY{n}{x6}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} LeveneResult(statistic=68.59198016291359, pvalue=3.0545681348735126e-54)
+\end{Verbatim}
+            
+    \hypertarget{distribution-analysis}{%
+\subsubsection{Distribution analysis}\label{distribution-analysis}}
+
+The data do not fit a normal distribution nor is the variance equal
+between categories. Analysis techniques that assume normal distribution
+are not applicable. The Kruskal--Wallis one-way analysis of variance
+test is a nonparametric alternative. The Kruskal--Wallis assumes
+independent and identically distributed random samples. Month to month
+counts of outbreaks meet the independence assumption as a previous
+month's count of outbreaks do not influence month's count. The
+probability plots below are used to analyze if the data are identically
+distributed. The lognormal distribution was used for the analysis.\\
+Visually assessing the plots, The contact modes seem to fit into two
+patterns (possibly two distributions). The first group is concave above
+the regression line; the pattern is comprised of person to person
+contact, food ingestion, unknown contact, and animal contact. The second
+group is more linear or slightly concave below the regression line; the
+pattern is comprised of water ingestion and environmental contact.
+Additionally, four of the contact modes have outlying points that likely
+have an undue influence on the regression, food ingestion, animal
+contact, water ingestion, and environmental contact.\\
+Along with these differences, the contact modes share similarities,
+skewed right and bounded by zero, and high coefficients of
+determination. In all the assumption of identically distribution is
+acceptable and the Kruskal-Wallis test is acceptable.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{a} \PY{o}{=} \PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{x3}\PY{p}{,} \PY{n}{x4}\PY{p}{,} \PY{n}{x5}\PY{p}{,} \PY{n}{x6}\PY{p}{]}
+         \PY{n}{dist} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lognorm}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{titles} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Person to Person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Food Ingestion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Animal Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Water Ingestion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Environmental Contact}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Probability Plots}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{ppp\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{slope} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{intercept} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{r\PYZus{}sq} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{y\PYZus{}hat\PYZus{}i} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{s\PYZus{}y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{y\PYZus{}pred\PYZus{}i\PYZus{}upper} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{y\PYZus{}pred\PYZus{}i\PYZus{}lower} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}Interate through the array of data       }
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{element} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{:}
+         
+         \PY{c+c1}{\PYZsh{}ppp\PYZus{}data is an array of arrays, three levels. Level 1; ppp\PYZus{}data[i][][] is }
+             \PY{c+c1}{\PYZsh{}each index in the enumeration}
+         \PY{c+c1}{\PYZsh{}Level 2 is the theorectical quantile and ordered data (ppp\PYZus{}data[i][0][]) }
+             \PY{c+c1}{\PYZsh{}or the slope, and intercept, and r\PYZus{}sq (ppp\PYZus{}data[i][1][])}
+         \PY{c+c1}{\PYZsh{}Level 3 is the either theorectical quantiles or ordered data }
+             \PY{c+c1}{\PYZsh{}(ppp\PYZus{}data[i][0][0 or 1]) or the slope, or intercept or r\PYZus{}sq (ppp\PYZus{}data[i][1][0 or 1 or 2])}
+             \PY{n}{ppp\PYZus{}data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{probplot}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{sparams}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{dist}\PY{o}{=}\PY{n}{dist}\PY{p}{,} \PY{n}{fit}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PYZbs{}
+                                      \PY{n}{plot}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{rvalue}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+                    
+         \PY{c+c1}{\PYZsh{}Aggregate regression parameters}
+             \PY{n}{slope}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ppp\PYZus{}data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{intercept}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ppp\PYZus{}data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{r\PYZus{}sq}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{ppp\PYZus{}data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{x}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ppp\PYZus{}data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ppp\PYZus{}data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{y\PYZus{}hat\PYZus{}i}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{slope}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{n}{intercept}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}The fitted line}
+                
+             \PY{n}{l} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{y\PYZus{}hat\PYZus{}i}\PY{p}{)}  \PY{c+c1}{\PYZsh{}Lines as data frames for charting}
+             \PY{n}{l} \PY{o}{=} \PY{n}{l}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Calculate 95\PYZpc{} prediction interval from the std. dev. of y and the fitted line}
+             \PY{n}{s\PYZus{}y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}hat\PYZus{}i}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{t\PYZus{}df} \PY{o}{=} \PY{n}{t}\PY{o}{.}\PY{n}{isf}\PY{p}{(}\PY{l+m+mf}{0.025}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{}t\PYZhy{}crit. }
+         
+             \PY{n}{y\PYZus{}pred\PYZus{}i\PYZus{}upper}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y\PYZus{}hat\PYZus{}i}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{p}{(}\PY{n}{t\PYZus{}df} \PY{o}{*} \PY{n}{s\PYZus{}y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PYZbs{}
+                                                \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PYZbs{}
+                                                 \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PYZbs{}
+                                                 \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{y\PYZus{}pred\PYZus{}i\PYZus{}lower}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y\PYZus{}hat\PYZus{}i}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{t\PYZus{}df} \PY{o}{*} \PY{n}{s\PYZus{}y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PYZbs{}
+                                                \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PYZbs{}
+                                                 \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PYZbs{}
+                                                 \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 
+         \PY{c+c1}{\PYZsh{}Last plot charts}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}hat\PYZus{}i}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{fill\PYZus{}between}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}i\PYZus{}upper}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}i\PYZus{}lower}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PYZbs{}
+                              \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.25}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}99caff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R\PYZhy{}Sq: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{r\PYZus{}sq}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ordered responses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Theoretical quantiles }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+                 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{kruskal-wallis-one-way-analysis-of-variance}{%
+\subsubsection{Kruskal-Wallis one-way analysis of
+variance}\label{kruskal-wallis-one-way-analysis-of-variance}}
+
+The null hypothesis of the Kruskal-Wallis test is that the medians of
+all groups are equal. The analysis returned a p-value less than 0.001.
+The there is evidence to reject the null hypothesis and at least one
+group has a different median (\(\alpha\) = 0.05).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{kruskal}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{x3}\PY{p}{,} \PY{n}{x4}\PY{p}{,} \PY{n}{x5}\PY{p}{,} \PY{n}{x6}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} KruskalResult(statistic=392.8320668587309, pvalue=1.040021048262747e-82)
+\end{Verbatim}
+            
+    \hypertarget{mann-whitney-u-tests}{%
+\subsubsection{Mann Whitney U tests}\label{mann-whitney-u-tests}}
+
+The Mann Whitney U test compares two groups for differences of the
+median. Person to person contact has the highest median, followed by
+food ingestion, unknown contact, water ingestion, animal contact, and
+environmental contact. To get a sense of the order of medians, highest
+to lowest comparisons were made using Mann-Whitney. Note that multiple
+comparisons will inflate type I error.
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Contact Mode Higher & Contact Mode Lower & p Value\tabularnewline
+\midrule
+\endhead
+Person to person & Food & \textless{}0.001\tabularnewline
+Food & Unknown & 0.001\tabularnewline
+Unknown & Water & 0.02\tabularnewline
+Water & Animal & \textless{}0.001\tabularnewline
+Animal & Environmental & 0.12\tabularnewline
+\bottomrule
+\end{longtable}
+
+Person to person contact is significantly different than food
+ingestion.\\
+Food ingestion is greater than unknown contact.\\
+Unknown contact is greater than water ingestion.\\
+Water ingestion is greater than animal contact.\\
+Animal contact and environmental contact are likely equal.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{mannwhitneyu}\PY{p}{(}\PY{n}{x4}\PY{p}{,} \PY{n}{x6}\PY{p}{,} \PY{n}{use\PYZus{}continuity}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} MannwhitneyuResult(statistic=2032.5, pvalue=0.2065043148364123)
+\end{Verbatim}
+            
+    \hypertarget{additional-analysis}{%
+\subsubsection{Additional analysis}\label{additional-analysis}}
+
+    \hypertarget{illnesses-by-month}{%
+\paragraph{Illnesses by month}\label{illnesses-by-month}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{aggregated\PYZus{}outbreaks\PYZus{}2009\PYZus{}greater\PYZus{}person} \PY{o}{=} \PYZbs{}
+         \PY{n}{aggregated\PYZus{}outbreaks\PYZus{}2009\PYZus{}greater}\PY{p}{[}\PY{n}{aggregated\PYZus{}outbreaks\PYZus{}2009\PYZus{}greater}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{catplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                         \PY{n}{data}\PY{o}{=}\PY{n}{aggregated\PYZus{}outbreaks\PYZus{}2009\PYZus{}greater\PYZus{}person}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{point}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                         \PY{n}{legend\PYZus{}out}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{ci}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{height}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,} \PY{n}{aspect}\PY{o}{=}\PY{l+m+mi}{11}\PY{o}{/}\PY{l+m+mi}{6}\PY{p}{)}\PYZbs{}
+             \PY{c+c1}{\PYZsh{}.set\PYZus{}xticklabels(aggregated\PYZus{}outbreaks\PYZus{}2009\PYZus{}greater[\PYZsq{}Year\PYZsq{}])\PYZbs{}}
+             \PY{c+c1}{\PYZsh{}.ticker.MultipleLocator(base=12)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Illnesses by Month for each Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month of Outbreak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{leg} \PY{o}{=} \PY{n}{g}\PY{o}{.}\PY{n}{axes}\PY{o}{.}\PY{n}{flat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{get\PYZus{}legend}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}new\PYZus{}title = \PYZsq{}Contact Mode\PYZsq{}}
+         \PY{c+c1}{\PYZsh{}leg.set\PYZus{}title(new\PYZus{}title)}
+         \PY{c+c1}{\PYZsh{}new\PYZus{}labels = [\PYZsq{}Animal Contact\PYZsq{}, \PYZsq{}Environmental Contact\PYZsq{}, \PYZsq{}Food Ingestion\PYZsq{}, \PYZbs{}}
+         \PY{c+c1}{\PYZsh{}             \PYZsq{}Person to Person Contact\PYZsq{}, \PYZsq{}Unknown\PYZsq{}, \PYZsq{}Water Ingestion\PYZsq{}]}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{by-setting}{%
+\paragraph{by Setting}\label{by-setting}}
+
+The top five settings where outbreaks occur are, long-term care
+facilities, schools, unknown setting, child day-care, and hospitals.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{outbreaks\PYZus{}person} \PY{o}{=} \PY{n}{outbreaks}\PY{p}{[}\PY{n}{outbreaks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{outbreaks\PYZus{}person\PYZus{}group} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{outbreaks\PYZus{}person}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Setting}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False} \PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{labels} \PY{o}{=} \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Setting}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{ymax} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{y\PYZus{}pos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{y\PYZus{}pos}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{y\PYZus{}pos}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{4.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cummulative Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{ymax}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Top Settings for Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{by-state}{%
+\paragraph{by State}\label{by-state}}
+
+There doesn't seem to be a state with greater outbreaks.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{outbreaks\PYZus{}person} \PY{o}{=} \PY{n}{outbreaks}\PY{p}{[}\PY{n}{outbreaks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{outbreaks\PYZus{}person\PYZus{}group} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{outbreaks\PYZus{}person}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{State}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False} \PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{labels} \PY{o}{=} \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{State}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{ymax} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{y\PYZus{}pos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{y\PYZus{}pos}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{y\PYZus{}pos}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{4.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cummulative Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{ymax}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Top States for Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{by-etiology}{%
+\paragraph{by Etiology}\label{by-etiology}}
+
+Norovirus is the top cause of illnesses.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{outbreaks\PYZus{}person} \PY{o}{=} \PY{n}{outbreaks}\PY{p}{[}\PY{n}{outbreaks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary\PYZus{}mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Person}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{outbreaks\PYZus{}person\PYZus{}group} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{outbreaks\PYZus{}person}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Etiology}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False} \PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{labels} \PY{o}{=} \PY{n}{outbreaks\PYZus{}person\PYZus{}group}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Etiology}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{ymax} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{y\PYZus{}pos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{y\PYZus{}pos}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{y\PYZus{}pos}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{4.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cummulative Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{ymax}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Top Etiology for Illnesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
